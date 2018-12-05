@@ -2,20 +2,27 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
+use App\User;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return string
+     * @param  \Closure  $next
+     * @return mixed
      */
-    protected function redirectTo($request)
+    public function handle($request, Closure $next, ...$guards)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        $token = $request->header('Authorization');
+        if($token && User::where('api_token', $token)->first()){
+            return $next($request);
         }
+        return response()->json([
+            'message' => 'Not a valid API request.',
+        ], 400);
     }
 }
