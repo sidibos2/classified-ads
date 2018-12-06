@@ -1,7 +1,7 @@
 # classified-ads
 This is  RESTful JSON API for classified ads
 
-## requirements
+## Requirements
 Pleased make sure you have [Docker](https://www.docker.com/) and docker-compose installed
 
 ## Setup
@@ -80,7 +80,14 @@ $ http://localhost:8080/api/list-ad
 
 // the method is GET
 
-// The response will be a JSON array
+// The response will be a JSON array of all the ads
+```
+
+## Running the test
+Run the following command from your project root 
+
+```console
+$ ./vendor/bin/phpunit tests 
 ```
 
 
