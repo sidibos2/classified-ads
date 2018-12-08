@@ -22,7 +22,7 @@ class Authenticate extends Middleware
             return $next($request);
         }
         return response()->json([
-            'message' => 'Not a valid API request.',
-        ], 400);
+            'message' => 'Not authorized.',
+        ], 401);
     }
 }

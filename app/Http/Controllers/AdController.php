@@ -96,9 +96,6 @@ class AdController extends Controller
         $validator = Validator::make($input, $validationRules);
 
         return !$validator->fails();
-        if ($validator->fails()) {
-            return response()->json(['response'=> 'there has been an error'], 400);
-        }
     }
 
     private function getInputValidationRules()
